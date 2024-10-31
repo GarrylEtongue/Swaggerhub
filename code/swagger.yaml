@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  title: Bitbucket Logs API
+  version: 1.0.0
+  description: API to retrieve logs from Bitbucket repositories.
+servers:
+  - url: https://api.bitbucket.org/2.0
