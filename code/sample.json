@@ -1,0 +1,17 @@
+{
+    "timestamp": "2024-10-31T14:30:00Z",
+    "Author": "Jane Doe",
+    "AuthorID": "A123456",
+    "category": "Incident",
+    "summary": "A brief summary of the incident.",
+    "system": "Payment Gateway",
+    "Affected Objects": "Transaction Records",
+    "changed Values": "Status updated from pending to completed",
+    "IP address": "192.168.1.1",
+    "Method": "POST",
+    "Node": "Node-1",
+    "extra Attributes": {
+        "Severity": "High",
+        "Tags": ["urgent", "finance"]
+    }
+}

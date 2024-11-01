@@ -15,54 +15,69 @@ const swaggerDocument = YAML.parse(fs.readFileSync('./swagger.yaml', 'utf8'));
 // Serve the Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// In-memory data storage (for demo purposes)
-let items = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' }
+// Updated in-memory data storage
+let records = [
+  {
+    timestamp: "2024-10-31T14:30:00Z",
+    Author: "Jane Doe",
+    AuthorID: "A123456",
+    category: "Incident",
+    summary: "A brief summary of the incident.",
+    system: "Payment Gateway",
+    "Affected Objects": "Transaction Records",
+    "changed Values": "Status updated from pending to completed",
+    "IP address": "192.168.1.1",
+    Method: "POST",
+    Node: "Node-1",
+    "extra Attributes": {
+      Severity: "High",
+      Tags: ["urgent", "finance"]
+    }
+  }
 ];
 
-// CRUD Routes
+// CRUD Routes for Records
 // Create
-app.post('/api/v1/items', (req, res) => {
-  const newItem = { id: items.length + 1, ...req.body };
-  items.push(newItem);
-  res.status(201).json(newItem);
+app.post('/api/v1/records', (req, res) => {
+  const newRecord = { id: records.length + 1, ...req.body };
+  records.push(newRecord);
+  res.status(201).json(newRecord);
 });
 
 // Read all
-app.get('/api/v1/items', (req, res) => {
-  res.json(items);
+app.get('/api/v1/records', (req, res) => {
+  res.json(records);
 });
 
 // Read one
-app.get('/api/v1/items/:id', (req, res) => {
-  const item = items.find(i => i.id === parseInt(req.params.id));
-  if (item) {
-    res.json(item);
+app.get('/api/v1/records/:id', (req, res) => {
+  const record = records.find(r => r.id === parseInt(req.params.id));
+  if (record) {
+    res.json(record);
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status(404).json({ message: 'Record not found' });
   }
 });
 
 // Update
-app.put('/api/v1/items/:id', (req, res) => {
-  const item = items.find(i => i.id === parseInt(req.params.id));
-  if (item) {
-    Object.assign(item, req.body);
-    res.json(item);
+app.put('/api/v1/records/:id', (req, res) => {
+  const record = records.find(r => r.id === parseInt(req.params.id));
+  if (record) {
+    Object.assign(record, req.body);
+    res.json(record);
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status(404).json({ message: 'Record not found' });
   }
 });
 
 // Delete
-app.delete('/api/v1/items/:id', (req, res) => {
-  const itemIndex = items.findIndex(i => i.id === parseInt(req.params.id));
-  if (itemIndex !== -1) {
-    items.splice(itemIndex, 1);
+app.delete('/api/v1/records/:id', (req, res) => {
+  const recordIndex = records.findIndex(r => r.id === parseInt(req.params.id));
+  if (recordIndex !== -1) {
+    records.splice(recordIndex, 1);
     res.status(204).send();
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status(404).json({ message: 'Record not found' });
   }
 });
 

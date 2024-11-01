@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
-  title: My API
+  title: Records API
   version: 1.0.0
-  description: A simple CRUD API documentation example
+  description: API for managing incident records
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/v1/items:
+  /api/v1/records:
     get:
-      summary: Get all items
+      summary: Get all records
       responses:
         '200':
           description: Successful response
@@ -18,13 +18,8 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties:
-                    id:
-                      type: integer
-                    name:
-                      type: string
     post:
-      summary: Create a new item
+      summary: Create a new record
       requestBody:
         required: true
         content:
@@ -32,23 +27,43 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                timestamp:
                   type: string
+                Author:
+                  type: string
+                AuthorID:
+                  type: string
+                category:
+                  type: string
+                summary:
+                  type: string
+                system:
+                  type: string
+                Affected Objects:
+                  type: string
+                changed Values:
+                  type: string
+                IP address:
+                  type: string
+                Method:
+                  type: string
+                Node:
+                  type: string
+                extra Attributes:
+                  type: object
+                  properties:
+                    Severity:
+                      type: string
+                    Tags:
+                      type: array
+                      items:
+                        type: string
       responses:
         '201':
-          description: Item created successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-  /api/v1/items/{id}:
+          description: Record created successfully
+  /api/v1/records/{id}:
     get:
-      summary: Get an item by ID
+      summary: Get a record by ID
       parameters:
         - in: path
           name: id
@@ -57,20 +72,11 @@ paths:
             type: integer
       responses:
         '200':
-          description: Item found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
+          description: Record found
         '404':
-          description: Item not found
+          description: Record not found
     put:
-      summary: Update an item by ID
+      summary: Update a record by ID
       parameters:
         - in: path
           name: id
@@ -83,16 +89,13 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                name:
-                  type: string
       responses:
         '200':
-          description: Item updated successfully
+          description: Record updated successfully
         '404':
-          description: Item not found
+          description: Record not found
     delete:
-      summary: Delete an item by ID
+      summary: Delete a record by ID
       parameters:
         - in: path
           name: id
@@ -101,6 +104,6 @@ paths:
             type: integer
       responses:
         '204':
-          description: Item deleted successfully
+          description: Record deleted successfully
         '404':
-          description: Item not found
+          description: Record not found
